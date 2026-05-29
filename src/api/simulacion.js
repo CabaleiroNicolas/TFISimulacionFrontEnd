@@ -104,7 +104,7 @@ export function adaptarRespuesta(raw, params) {
   const { operarios, horasTurno, costoOperarioHora, jornadasASimular } = params;
 
   const tiempoTotalMin       = horasAMinutos(raw.tiempoTotal);
-  const tiempoPromedioMin    = Math.round(tiempoTotalMin / jornadasASimular);
+  const tiempoPromedioMin    = Math.round(tiempoTotalMin / jornadasASimular / operarios);
   const capacidadTurnoMin    = operarios * horasTurno * 60;
   const utilizacionPromedio  = Math.min(tiempoPromedioMin / capacidadTurnoMin, 1);
 
