@@ -146,16 +146,9 @@ export function adaptarRespuesta(raw, params) {
         vidrio:   raw.materialesCRT?.kgVidrioPanelTotalCRT ?? 0,
       },
       peligroso: (() => {
-        const m = raw.materialesCRT ?? {};
-        const candidatos = [
-          { tipo: 'Pb',  gramos: m.grsPlomoTotalCRT   ?? 0, cantidad: Math.round(((m.grsPlomoTotalCRT ?? 0)) / 1000 * 100) / 100, unidad: 'kg' },
-          { tipo: 'Hg',  gramos: (m.mgsMercurioTotalCRT ?? 0) / 1000,    cantidad: Math.round((m.mgsMercurioTotalCRT ?? 0) * 10) / 10,                    unidad: 'mg' },
-          { tipo: 'Cd',  gramos: m.grsCadmioTotalCRT    ?? 0,             cantidad: Math.round((m.grsCadmioTotalCRT ?? 0) * 100) / 100,                    unidad: 'gr' },
-          { tipo: 'BFR', gramos: m.grsBFRTotalCRT       ?? 0,             cantidad: Math.round((m.grsBFRTotalCRT ?? 0) * 100) / 100,                       unidad: 'gr' },
-        ].filter(c => c.gramos > 0);
-        if (!candidatos.length) return null;
-        const max = candidatos.reduce((a, b) => a.gramos >= b.gramos ? a : b);
-        return { tipo: max.tipo, cantidad: max.cantidad, unidad: max.unidad };
+        const plomoGr = raw.materialesCRT?.grsPlomoTotalCRT ?? 0;
+        if (plomoGr <= 0) return null;
+        return { tipo: 'Pb', cantidad: Math.round(plomoGr / 1000 * 100) / 100, unidad: 'kg' };
       })(),
       materialesCompletos: raw.materialesCRT ? buildMaterialesCRT(raw.materialesCRT) : null,
     },
@@ -172,16 +165,9 @@ export function adaptarRespuesta(raw, params) {
         vidrio:   raw.materialesLCD?.kgVidrioPanelTotalLCD ?? 0,
       },
       peligroso: (() => {
-        const m = raw.materialesLCD ?? {};
-        const candidatos = [
-          { tipo: 'Pb',  gramos: m.grsPlomoTotalLCD   ?? 0, cantidad: Math.round((m.grsPlomoTotalLCD ?? 0) / 1000 * 100) / 100, unidad: 'kg' },
-          { tipo: 'Hg',  gramos: (m.mgsMercurioTotalLCD ?? 0) / 1000,    cantidad: Math.round((m.mgsMercurioTotalLCD ?? 0) * 10) / 10,                    unidad: 'mg' },
-          { tipo: 'Cd',  gramos: m.grsCadmioTotalLCD    ?? 0,             cantidad: Math.round((m.grsCadmioTotalLCD ?? 0) * 100) / 100,                    unidad: 'gr' },
-          { tipo: 'BFR', gramos: m.grsBFRTotalLCD       ?? 0,             cantidad: Math.round((m.grsBFRTotalLCD ?? 0) * 100) / 100,                       unidad: 'gr' },
-        ].filter(c => c.gramos > 0);
-        if (!candidatos.length) return null;
-        const max = candidatos.reduce((a, b) => a.gramos >= b.gramos ? a : b);
-        return { tipo: max.tipo, cantidad: max.cantidad, unidad: max.unidad };
+        const mercurioMg = raw.materialesLCD?.mgsMercurioTotalLCD ?? 0;
+        if (mercurioMg <= 0) return null;
+        return { tipo: 'Hg', cantidad: Math.round(mercurioMg * 10) / 10, unidad: 'mg' };
       })(),
       materialesCompletos: raw.materialesLCD ? buildMaterialesLCD(raw.materialesLCD) : null,
     },
