@@ -473,11 +473,7 @@ export function ResultsView({ sim, onSave, saving, guardada = false, saveError =
               <td className="right num">{formatNum(detallePorTipo.reduce((s, r) => s + r.materiales.aluminio, 0))} kg</td>
               <td className="right num">{formatNum(detallePorTipo.reduce((s, r) => s + r.materiales.plastico, 0))} kg</td>
               <td className="right num">{formatNum(detallePorTipo.reduce((s, r) => s + r.materiales.vidrio, 0))} kg</td>
-              <td>
-                <span className="pill warn">
-                  {formatNum(env.plomoContenidoKg)} kg + {formatNum(env.mercurioContenidoMg)} mg
-                </span>
-              </td>
+              <td></td>
             </tr>
           </tbody>
         </table>
