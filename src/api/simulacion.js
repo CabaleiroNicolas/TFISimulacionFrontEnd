@@ -183,7 +183,11 @@ export function adaptarRespuesta(raw, params) {
         plastico: (raw.materialesLED?.kgPlastABSTotalLED ?? 0) + (raw.materialesLED?.kgPlastPCTotalLED ?? 0),
         vidrio:   raw.materialesLED?.kgVidrioPanelTotalLED ?? 0,
       },
-      peligroso: null,
+      peligroso: (() => {
+        const plomoGr = raw.materialesLED?.grsPlomoTotalLED ?? 0;
+        if (plomoGr > 0) return { tipo: 'Pb', cantidad: Math.round(plomoGr / 1000 * 100) / 100, unidad: 'kg' };
+        return null;
+      })(),
       materialesCompletos: raw.materialesLED ? buildMaterialesLED(raw.materialesLED) : null,
     },
   ];
