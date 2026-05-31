@@ -244,8 +244,8 @@ export function adaptarRespuesta(raw, params) {
       plomoIngresadoKg:    plomoKg,   // backend no separa ingresado vs. contenido todavía
       mercurioContenidoMg: mercurioTotalMg,
       mercurioIngresadoMg: mercurioTotalMg,
-      sueloProtegidoM3:    Math.round(plomoKg * 2.9),   // estimación: 1 kg Pb contamina ~2.9 m³
-      aguaProtegidaL:      Math.round(mercurioTotalMg * 16.6), // estimación: 1 mg Hg contamina ~16.6 L
+      sueloProtegidoM3:    raw.sueloProt ?? 0,
+      aguaProtegidaL:      raw.aguaProt  ?? 0,
     },
     detallePorTipo,
     // datos crudos del backend disponibles para vistas futuras
