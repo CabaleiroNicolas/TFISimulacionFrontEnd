@@ -245,7 +245,7 @@ export function adaptarRespuesta(raw, params) {
       mercurioContenidoMg: mercurioTotalMg,
       mercurioIngresadoMg: mercurioTotalMg,
       sueloProtegidoM3:    raw.sueloProt ?? 0,
-      aguaProtegidaL:      raw.aguaProt  ?? 0,
+      aguaProtegidaL:      (raw.aguaProt ?? 0) / 1000,
     },
     detallePorTipo,
     // datos crudos del backend disponibles para vistas futuras

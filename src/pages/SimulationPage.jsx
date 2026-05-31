@@ -390,7 +390,7 @@ export function ResultsView({ sim, onSave, saving, guardada = false, saveError =
               />
               <EnvTile
                 label="Agua protegida"
-                value={`${formatNum(env.aguaProtegidaL)} L`}
+                value={`${formatNum(env.aguaProtegidaL)} m³`}
                 sub="napas subterráneas"
               />
             </div>
@@ -626,7 +626,7 @@ export function DetailView({ sim }) {
           <div className="stat">
             <div className="label">Mercurio contenido</div>
             <div className="value num">{formatNum(env.mercurioContenidoMg)}<span className="unit">mg</span></div>
-            <div className="delta">{formatNum(env.aguaProtegidaL)} L agua protegida</div>
+            <div className="delta">{formatNum(env.aguaProtegidaL)} m³ agua protegida</div>
           </div>
         </div>
       </div>
