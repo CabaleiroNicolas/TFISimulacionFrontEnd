@@ -27,7 +27,7 @@ export function CenterPage() {
   }, [data]);
 
   function handleChange(key, value) {
-    const parsed = key === 'cantMonitoresPromedio' ? value.replace(/[^0-9]/g, '') : value;
+    const parsed = key === 'cantMonitoresPromedio' ? value.replace(/[^0-9]/g, '').slice(0, 8) : value;
     setForm(prev => ({ ...prev, [key]: parsed }));
     setDirty(true);
     setSaved(false);
@@ -85,6 +85,7 @@ export function CenterPage() {
                 className={`input${inputMode === 'numeric' ? ' num' : ''}`}
                 type={type}
                 inputMode={inputMode}
+                maxLength={inputMode === 'numeric' ? 8 : undefined}
                 value={loading ? '' : (form[key] ?? '')}
                 disabled={loading}
                 onChange={e => handleChange(key, e.target.value)}

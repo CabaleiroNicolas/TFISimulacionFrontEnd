@@ -117,7 +117,7 @@ export function NewSimulationPage() {
   const est = calcEstim(form.operarios, form.horasTurno, form.costoHora, form.jornadas);
 
   const set = (field) => (e) => {
-    const raw = e.target.value.replace(/[^0-9]/g, '');
+    const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, 8);
     setForm(prev => {
       const next = { ...prev, [field]: raw };
       localStorage.setItem('sim_form', JSON.stringify(next));
@@ -200,6 +200,7 @@ export function NewSimulationPage() {
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    maxLength={8}
                     value={form.operarios}
                     onChange={set('operarios')}
                   />
@@ -220,6 +221,7 @@ export function NewSimulationPage() {
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    maxLength={8}
                     value={form.horasTurno}
                     onChange={set('horasTurno')}
                   />
@@ -241,6 +243,7 @@ export function NewSimulationPage() {
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    maxLength={8}
                     value={form.costoHora}
                     onChange={set('costoHora')}
                   />
@@ -260,6 +263,7 @@ export function NewSimulationPage() {
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
+                    maxLength={8}
                     value={form.jornadas}
                     onChange={set('jornadas')}
                   />

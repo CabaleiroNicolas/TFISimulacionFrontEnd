@@ -47,7 +47,7 @@ export function PricesPage() {
 
   function handleChange(key, value) {
     // Permitir solo dígitos y un punto decimal
-    const sanitized = value.replace(/[^0-9.]/g, '').replace(/^(\d*\.?\d*).*$/, '$1');
+    const sanitized = value.replace(/[^0-9.]/g, '').replace(/^(\d*\.?\d*).*$/, '$1').slice(0, 8);
     setForm(prev => ({ ...prev, [key]: sanitized }));
     setDirty(true);
     setSaved(false);
@@ -116,6 +116,7 @@ export function PricesPage() {
                         className="input with-prefix with-suffix num"
                         type="text"
                         inputMode="decimal"
+                        maxLength={8}
                         value={loading ? '' : (form[key] ?? '')}
                         disabled={loading}
                         onChange={e => handleChange(key, e.target.value)}
