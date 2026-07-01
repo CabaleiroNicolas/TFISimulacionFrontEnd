@@ -117,7 +117,8 @@ export function NewSimulationPage() {
   const est = calcEstim(form.operarios, form.horasTurno, form.costoHora, form.jornadas);
 
   const set = (field) => (e) => {
-    const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, 8);
+    const maxLen = field === 'jornadas' ? 3 : 8;
+    const raw = e.target.value.replace(/[^0-9]/g, '').slice(0, maxLen);
     setForm(prev => {
       const next = { ...prev, [field]: raw };
       localStorage.setItem('sim_form', JSON.stringify(next));
@@ -263,7 +264,7 @@ export function NewSimulationPage() {
                     type="text"
                     inputMode="numeric"
                     pattern="[0-9]*"
-                    maxLength={8}
+                    maxLength={3}
                     value={form.jornadas}
                     onChange={set('jornadas')}
                   />
